@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CinemaProjectB.Pages;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,15 +7,11 @@ namespace CinemaProjectB
 {
     class Beheer
     {
-        public static void Clear()
-        {
-            Console.Clear();           
-        }
         public static string Input(string vraag = null)
         {
             if (vraag != null)
             {
-                Console.WriteLine(vraag);
+                Console.Write(vraag);
             }
             
             return Console.ReadLine();
@@ -26,5 +23,8 @@ namespace CinemaProjectB
 
             Console.WriteLine($"Naam {naam} leeftijd: {Leetijd}");
         }
+
+
+       
     }
 }

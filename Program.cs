@@ -1,47 +1,29 @@
-﻿using System;
+﻿using CinemaProjectB.DAL;
+using CinemaProjectB.Pages;
+using System;
 
 namespace CinemaProjectB
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
 
-            //Beheer.Clear();
+            //Console.WriteLine("Hallo");
+            //Console.ReadKey(true);
+            //Console.Clear();
             //string naam = Beheer.Input("Wat is je naam?: ");
             //Console.WriteLine(naam);
             //Beheer.CreateAccount();
-            MainMenu();
+      
+            DataStorageHandler.Init("ProjectB.json");
+            WelcomePage.Run();
+          
+
+
         }
 
-        public static void MainMenu()
-        {
-            string prompt = "Welkom bij de Bioscoop";
-            string[] options = { "Login", "Registreren" };
-            Menu StartPagina = new Menu(prompt, options);
-            StartPagina.DisplayOptions();
-            int selectedIndex = StartPagina.Run();
-
-            if (selectedIndex == 0)
-            {
-                Login();
-            }
-            else if (selectedIndex == 1)
-            {
-                Registreren();
-            }
-        }
-        public static void Login()
-        {
-            Console.WriteLine("Ingelogd");
-            Console.ReadKey(true);
-            MainMenu();
-        }
-        public static void Registreren()
-        {
-            Console.WriteLine("Registeren");
-            Console.ReadKey(true);
-            MainMenu();
-        }
+     
+        
     }
 }

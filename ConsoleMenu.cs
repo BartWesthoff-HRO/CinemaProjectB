@@ -1,21 +1,23 @@
-﻿using System;
+﻿using CinemaProjectB.DAL;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using static System.Console;
 
 namespace CinemaProjectB
 {
-    class Menu
+    class ConsoleMenu
     {
         private int SelectedIndex;
         private readonly string[] Options;
         private readonly string   Prompt;
 
-        public Menu(string prompt, string[] options)
+        public ConsoleMenu(string prompt, string[] options)
         {
             Prompt = prompt;
             Options = options;
             SelectedIndex = 0;
+            DataStorageHandler.SaveChanges();
         }
         public void DisplayOptions()
         {
