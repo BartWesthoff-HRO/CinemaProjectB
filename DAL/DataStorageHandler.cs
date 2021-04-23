@@ -3,22 +3,23 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using CinemaProjectB.Classes;
 
 namespace CinemaProjectB.DAL
 {
     public class DataStorageHandler
     {
-        private static string StorageFileLocation { get; set; }
+        public static string StorageFileLocation { get; set; }
         public static DataStorage Storage { get; set; }
 
         public static void Init(string filename)
         {
             // use case hint
-            if(!(File.Exists(filename)))
+            if (!(File.Exists(filename)))
             {
                 using StreamWriter sw = File.CreateText(filename);
             }
-            
+
             StorageFileLocation = filename;
             string fileContent = File.ReadAllText(StorageFileLocation);
 
@@ -29,19 +30,17 @@ namespace CinemaProjectB.DAL
                 if (Storage == null)
                 { Storage = new DataStorage(); }
             }
-            catch (Exception)
+            catch (Exception e )
             {
                 Storage = new DataStorage();
+                Console.WriteLine(e);
             }   
-        }
-
-     
+        } 
 
         public static void SaveChanges()
         {
-            string result = JsonConvert.SerializeObject(Storage, Formatting.Indented);
-                 
-            File.WriteAllText(StorageFileLocation, result);
+            string JsonString = JsonConvert.SerializeObject(Storage, Formatting.Indented);    
+            File.WriteAllText(StorageFileLocation, JsonString);
         }
     }
 }

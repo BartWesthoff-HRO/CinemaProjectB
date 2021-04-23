@@ -4,10 +4,11 @@ using System.Text;
 
 namespace CinemaProjectB.Classes
 {
-    public class Person
+    public abstract class Person
     {
-        public string Firstname { get; set; }
-        public string Lastname { get;  set; }
-        //public DateTime BirthDate { get; set; }
+        
+        public string Firstname { get; set; } = "not valid";
+        public string Lastname { get; set; } = "not valid";
+        public List<string> MiddleName { get; set; } = new List<string>();
     }
 }

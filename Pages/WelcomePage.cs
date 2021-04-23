@@ -14,11 +14,11 @@ namespace CinemaProjectB.Pages
             DataStorageHandler.SaveChanges();
             Console.Clear();
             string prompt = "Welkom bij de Bioscoop";
-            string[] options = { "Login", "Registreren" };
+            string[] options = { "Login", "Registreren", "Zaal bekijken" };
             ConsoleMenu StartPagina = new ConsoleMenu(prompt, options);
             StartPagina.DisplayOptions();
             int selectedIndex = StartPagina.Run();
-          
+
             if (options[selectedIndex] == "Login")
             {
                 LoginPage.Login();
@@ -26,6 +26,10 @@ namespace CinemaProjectB.Pages
             else if (options[selectedIndex] == "Registreren")
             {
                 LoginPage.Registreren();
+            }
+            else if(options[selectedIndex] == "Zaal bekijken")
+            {
+                ReservationPage.Run();
             }
             
         }

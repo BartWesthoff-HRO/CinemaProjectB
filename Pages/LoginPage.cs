@@ -27,12 +27,19 @@ namespace CinemaProjectB.Pages
         public static void Registreren()
         {
             Console.Clear();
-            Person Guest = new Person
+            Customer Guest = new Customer
             {
                 Firstname = Beheer.Input("Wat is uw voornaam?: "),
-                Lastname = Beheer.Input("Wat is uw Achternaam?: ")
+                Lastname = Beheer.Input("Wat is uw Achternaam?: "),
 
             };
+            string MiddleName = Beheer.Input("Wat is uw tweede naam?: ");
+            while (MiddleName != "Q" && MiddleName != "q")
+            {
+                Guest.MiddleName.Add(MiddleName);
+                MiddleName = Beheer.Input("Wat is uw tweede naam?: ");
+            }
+            
             DataStorageHandler.Storage.Persons.Add(Guest);
             Console.ReadKey(true);
             WelcomePage.Run();
