@@ -9,15 +9,8 @@ namespace CinemaProjectB
     {
         private static void Main(string[] args)
         {
-
-       
-
             DataStorageHandler.Init("ProjectB.json");
             ReservationPage.Run();
-          //  WelcomePage.Run();
-
-
-
         }
 
 

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CinemaProjectB.Classes.Seats;
 
 namespace CinemaProjectB.Classes
 {
     public class Reservation
     {
         public string ID { get; set; } = "";
-        public Seat Seats { get; set; } = new Seat();
+        public BaseSeat Seats { get; set; } = new BaseSeat(new Customer(), -1,-1,-1.00);
+        public string Snack { get; set; }
 
 
     }

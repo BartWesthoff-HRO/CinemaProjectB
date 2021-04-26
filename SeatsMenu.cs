@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using CinemaProjectB.Classes;
+using CinemaProjectB.Classes.Seats;
 using CinemaProjectB.DAL;
 using static System.Console;
 
@@ -13,6 +14,7 @@ namespace CinemaProjectB
         public  int SelectedColumn;
         public  object[][] seats;
         public readonly  string Prompt;
+
 
 
         public SeatsMenu(string prompt, object[][] seats_)
@@ -33,36 +35,56 @@ namespace CinemaProjectB
                 string row = "";
                 for(int j =0; j < seats[i].Length; j++)
                 {
-                    row += seats[i][j];
-                    if(i == SelectedRow && j == SelectedColumn)
+                    bool SelectedSeat = i == SelectedRow && j == SelectedColumn;
+                    object choosenSeat = seats[i][j];             
+                    row += choosenSeat;
+                    string res = "";
+                    if (SelectedSeat)
                     {
                         ForegroundColor = ConsoleColor.Black;
                         BackgroundColor = ConsoleColor.White;
+
                     }
-                    else
-                    { 
+                    if (!SelectedSeat)
+                    {
                         ForegroundColor = ConsoleColor.White;
                         BackgroundColor = ConsoleColor.Black;
                     }
-                    if(seats[i][j] is Seat)
+                    if (choosenSeat is MasterSeat Mseat)
                     {
-                        Write("[*]");
+                        ForegroundColor = Mseat.SelectedForegroundColor;
+                        BackgroundColor = Mseat.SelectedBackgroundColor;
+                        if (!SelectedSeat)
+                        {
+                            ForegroundColor = Mseat.NotSelectedForegroundColor;
+                            BackgroundColor = Mseat.NotSelectedBackgroundColor;
+                        }
+
+                        res += Mseat.Icon;
                     }
-                    else if (seats[i][j] is null)
+                    else if (choosenSeat is VipSeat seat2)
                     {
-                        Write("[||]");
+                        ForegroundColor = seat2.SelectedForegroundColor;
+                        BackgroundColor = seat2.SelectedBackgroundColor;
+                        if (!SelectedSeat)
+                        {
+                            ForegroundColor = seat2.NotSelectedForegroundColor;
+                            BackgroundColor = seat2.NotSelectedBackgroundColor;
+                        }
+                        res += seat2.Icon;
                     }
-                    else {
-                        Write("[NOT A SEAT]");
+                    if(!(choosenSeat is VipSeat || choosenSeat is MasterSeat))
+                    {
+                        res += "NO VIP SEAT]";
                     }
-                    
+                    Write(res);
                 }
                 WriteLine("");
             }
            
         }
 
-        public Seat Run()
+        public BaseSeat Run()
         {
             ConsoleKey keyPressed = ConsoleKey.B;
             while (keyPressed != ConsoleKey.Enter)
@@ -109,13 +131,18 @@ namespace CinemaProjectB
                 ResetColor();
 
             }
-            Seat selectedseat = new Seat
-            {
-                Row = SelectedRow,
-                Column = SelectedColumn
-            };
-            // List<int> selectedSeat = new List<int> { selectedseat.Row, selectedseat.Column };
-            //  selectedSeat = new List<int> { SelectedRow, SelectedColumn };
+            var obj = seats[SelectedRow][SelectedColumn];
+            double p = 0.0;
+            if (obj is VipSeat) { VipSeat s = (VipSeat)obj; p = s.Price; }
+            if (obj is MasterSeat) { MasterSeat s = (MasterSeat)obj; p = s.Price; }
+            BaseSeat selectedseat = new BaseSeat
+            (
+                null,
+                SelectedRow,
+                SelectedColumn,
+                p
+            );
+         
             return selectedseat;
         }
     }

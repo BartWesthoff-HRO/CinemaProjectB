@@ -11,42 +11,15 @@ namespace CinemaProjectB.Pages
 
         public static void Run()
         {
-            object[][] seats = new object[][]
-            {
-            new object[]{ new Seat(), new Seat() , new Seat()  },
-            new object[]{ new Seat() , new Admin() , null },
-            new object[]{ new Seat() , new Seat() , new Seat() },
-            };
-            string prompt = "Welkom bij de Bioscoop";
-            SeatsMenu zaal1 = new SeatsMenu(prompt, seats);
-            zaal1.Display();
-            Seat selectedSeat = zaal1.Run();
-
-
-            foreach (var item in DataStorageHandler.Storage.Reservations)
-            {
-                if (selectedSeat.Row == item.Seats.Row && selectedSeat.Column == item.Seats.Column)
-                {
-                    selectedSeat = null;
-                    Run();
-                    break;
-                }
-            }
-
+            var selectedSeat = SeatsPage.Run();
+            string snack = SnackPage.Run();
             Reservation res = new Reservation
             {
                 ID = "hallotest",
                 Seats = selectedSeat,
+                Snack = snack,
             };
-
-            if (res.Seats != null)
-            {
-                DataStorageHandler.Storage.Reservations.Add(res);
-            }
-            else { 
-                // catch error
-            }
-           
+            DataStorageHandler.Storage.Reservations.Add(res);
             DataStorageHandler.SaveChanges();
         }
 

@@ -6,5 +6,6 @@ namespace CinemaProjectB.Classes
 {
     public class Customer : Person
     {
+
     }
 }
