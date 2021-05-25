@@ -1,5 +1,6 @@
 ﻿using CinemaProjectB.Classes.Seats;
 using CinemaProjectB.DAL;
+using CinemaProjectB.Classes;
 using System;
 using System.Collections.Generic;
 using System.Text;

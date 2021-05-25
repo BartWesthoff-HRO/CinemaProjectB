@@ -133,11 +133,15 @@ namespace CinemaProjectB
             }
             var obj = seats[SelectedRow][SelectedColumn];
             double p = 0.0;
-            if (obj is VipSeat) { VipSeat s = (VipSeat)obj; p = s.Price; }
-            if (obj is MasterSeat) { MasterSeat s = (MasterSeat)obj; p = s.Price; }
+            if (obj is VipSeat) { 
+                VipSeat s = (VipSeat)obj;
+                p = s.Price;
+                
+            }
+            else if (obj is MasterSeat) { MasterSeat s = (MasterSeat)obj; p = s.Price; }
             BaseSeat selectedseat = new BaseSeat
             (
-                null,
+                new Customer(),
                 SelectedRow,
                 SelectedColumn,
                 p

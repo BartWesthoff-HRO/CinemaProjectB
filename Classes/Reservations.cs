@@ -9,5 +9,6 @@ namespace CinemaProjectB.Classes
         public string Snack { get; set; }
 
 
+
     }
 }
