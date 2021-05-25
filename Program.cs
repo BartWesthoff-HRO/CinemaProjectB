@@ -2,7 +2,7 @@
 using CinemaProjectB.Pages;
 using System;
 using System.Collections.Generic;
-
+using System.Runtime.InteropServices;
 
 public class Movie
 {
@@ -19,10 +19,22 @@ public class Movie
 }
 class Program
 {
+    [DllImport("kernel32.dll")]
+    static extern IntPtr GetConsoleWindow();
+    [DllImport("user32.dll")]
+    static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
     public static void Main()
     {
-        //DataStorageHandler.Init("Projectb.json");
-        DateTime st = new DateTime(2021, 1, 1, 10, 0, 0);
+
+     
+       
+ 
+        
+            ShowWindow(GetConsoleWindow(), 3);
+       
+    
+    //DataStorageHandler.Init("Projectb.json");
+    DateTime st = new DateTime(2021, 1, 1, 10, 0, 0);
         DateTime ed = st.AddHours(2);
         string name = "Iron man";
         Movie movie = new Movie(st, ed, name);
